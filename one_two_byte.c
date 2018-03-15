@@ -80,6 +80,7 @@ int			two_byte(char *s, t_plist *par)
 	a1 = a1 + 10000000;
 	a0 = two_to_ten(a0);
 	a1 = two_to_ten(a1);
+	free(s);
 	return (two_byte_print(a0, a1, par));
 }
 

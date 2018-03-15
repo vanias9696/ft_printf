@@ -30,22 +30,28 @@ unsigned int	two_to_ten(unsigned int k)
 
 int				unicode(unsigned int i, t_plist *par)
 {
-	char *s;
+	char	*s;
+	int		a;
 
+	a = 0;
 	if (i < 128)
 		return (one_byte(i, par));
-	if (i > 127 && i < 2048)
+	else if (i > 127 && i < 2048)
 	{
 		s = ft_utoa_base(i, 2);
-		return (two_byte(s, par));
+		a = two_byte(s, par);
 	}
-	if (i > 2047 && i < 65536)
+	else if (i > 2047 && i < 65536)
 	{
 		s = ft_utoa_base(i, 2);
-		return (three_byte(s, par));
+		a = three_byte(s, par);
 	}
-	s = ft_utoa_base(i, 2);
-	return (four_byte(s, par));
+	else
+	{
+		s = ft_utoa_base(i, 2);
+		a = four_byte(s, par);
+	}
+	return (a);
 }
 
 void			str_unicode(unsigned int *s)
@@ -64,5 +70,7 @@ void			str_unicode(unsigned int *s)
 		unicode(s[i], null);
 		i++;
 	}
+	free(null->flag);
+	free(null->spec);
 	free(null);
 }

@@ -34,14 +34,14 @@ static unsigned int	a1_three_byte(char *s, unsigned int a1)
 	return (a1);
 }
 
-static void			pr_nbr(t_bytelist *num)
+static void			pr_nbr(t_byte *num)
 {
 	ft_putchar(num->a0);
 	ft_putchar(num->a1);
 	ft_putchar(num->a2);
 }
 
-static int			three_byte_print(t_bytelist *num, t_plist *par)
+static int			three_byte_print(t_byte *num, t_plist *par)
 {
 	char	*free_s;
 
@@ -66,20 +66,21 @@ static int			three_byte_print(t_bytelist *num, t_plist *par)
 		free(free_s);
 		pr_nbr(num);
 	}
+	free(num);
 	return (par->wide);
 }
 
 int					three_byte(char *s, t_plist *par)
 {
-	t_bytelist	*num;
-	char		*free_s;
+	t_byte	*num;
+	char	*free_s;
 
-	num = (t_bytelist *)malloc(sizeof(t_bytelist));
+	num = (t_byte *)malloc(sizeof(t_byte));
 	if (ft_strlen(s) < 16)
 	{
 		free_s = s;
 		s = ft_n_and_s('0', 16 - ft_strlen(s), s, 1);
-		free(s);
+		free(free_s);
 	}
 	num->a2 = s[11] - 48 + (s[10] - 48) * 10;
 	num->a2 = num->a2 * 10 + (s[12] - 48);
@@ -92,8 +93,8 @@ int					three_byte(char *s, t_plist *par)
 	num->a2 = two_to_ten(num->a2);
 	if (par->wide > 3)
 		return (three_byte_print(num, par));
-	ft_putchar(num->a0);
-	ft_putchar(num->a1);
-	ft_putchar(num->a2);
+	pr_nbr(num);
+	free(num);
+	free(s);
 	return (3);
 }

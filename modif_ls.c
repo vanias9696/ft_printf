@@ -113,8 +113,6 @@ int			modif_ls(t_plist *par, va_list arg)
 	unsigned int	*s;
 
 	i = 0;
-	//if (MB_CUR_MAX != 4)
-	//	return (modif_s(par, arg));
 	s = va_arg(arg, unsigned int *);
 	if (s == 0 || (par->if_acc == 1 && par->accuracy == 0))
 		return (modif_s0(par));
@@ -126,7 +124,8 @@ int			modif_ls(t_plist *par, va_list arg)
 		str_unicode(s);
 		return (bytes);
 	}
-	if ((par->if_acc == 1 && par->wide < par->accuracy) || (par->if_acc == 0 && par->wide < bytes))
+	if ((par->if_acc == 1 && par->wide < par->accuracy) ||
+		(par->if_acc == 0 && par->wide < bytes))
 		return (pri_acc_unic(s, par, bytes));
 	return (acc_unic(s, par, ac_n_bytes(s, par->accuracy)));
 }

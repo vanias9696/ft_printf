@@ -26,8 +26,6 @@
 int	main(void)
 {
 	setlocale(LC_ALL, "");
-
 	printf("%i 1\n", printf("%4.15d\n", 424242));
-	printf("%i 1\n", ft_printf("%4.15dmy\n", 424242));
 	return (0);
 }
