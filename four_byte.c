@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void			a2_four_byte(char *s, t_bytelist *num)
+static void			a2_four_byte(char *s, t_byte *num)
 {
 	num->a1 = s[4] - 48 + (s[3] - 48) * 10;
 	num->a1 = num->a1 * 10 + (s[5] - 48);
@@ -40,7 +40,7 @@ static unsigned int	a3_four_byte(char *s, unsigned int a3)
 	return (a3);
 }
 
-static void			four_byte_print(t_bytelist *num)
+static void			four_byte_print(t_byte *num)
 {
 	ft_putchar(num->a0);
 	ft_putchar(num->a1);
@@ -48,7 +48,7 @@ static void			four_byte_print(t_bytelist *num)
 	ft_putchar(num->a3);
 }
 
-static int			four_print(t_plist *par, t_bytelist *num)
+static int			four_print(t_plist *par, t_byte *num)
 {
 	if (ft_while_not_n(par->flag, '-') >= 0)
 	{
@@ -70,11 +70,11 @@ static int			four_print(t_plist *par, t_bytelist *num)
 
 int					four_byte(char *s, t_plist *par)
 {
-	t_bytelist	*num;
-	char		*free_s;
+	t_byte	*num;
+	char	*free_s;
 
 	free_s = s;
-	num = (t_bytelist *)malloc(sizeof(t_bytelist));
+	num = (t_byte *)malloc(sizeof(t_byte));
 	if (ft_strlen(s) < 21)
 	{
 		s = ft_n_and_s('0', 21 - ft_strlen(s), s, 1);

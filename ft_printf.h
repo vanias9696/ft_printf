@@ -37,7 +37,7 @@ typedef struct		s_byte
 	unsigned int	a1;
 	unsigned int	a2;
 	unsigned int	a3;
-}					t_bytelist;
+}					t_byte;
 
 int					ft_printf(char *format, ...);
 int					type_defin(t_plist *par, va_list arg, char type);
