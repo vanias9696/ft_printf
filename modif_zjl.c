@@ -97,8 +97,8 @@ int		modif_lc(t_plist *par, va_list arg)
 	unsigned int	c;
 
 	c = va_arg(arg, unsigned int);
-	if (MB_CUR_MAX == 4)
-		return (unicode(c, par));
+	//if (MB_CUR_MAX == 4)
+	//	return (unicode(c, par));
 	return (one_byte(c, par));
 }
 
