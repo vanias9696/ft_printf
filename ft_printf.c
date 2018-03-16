@@ -25,7 +25,7 @@ static int	fl_width_acc(char *flag, va_list arg, int k)
 		flag[k] == '#' || flag[k] == '0' || flag[k] == '.' ||
 		(flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l' ||
 		flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z' ||
-		flag[k] == '*')
+		flag[k] == '*' || flag[k] == 't')
 		k = all_param(flag, k, param, arg);
 	k = type_defin(param, arg, flag[k]);
 	free(param->spec);
@@ -37,14 +37,14 @@ static int	fl_width_acc(char *flag, va_list arg, int k)
 static int	num_i(char *flag, int k)
 {
 	while (flag[k] == '-' || flag[k] == '+' || flag[k] == ' ' ||
-		flag[k] == '#' || flag[k] == '0' || flag[k] == '.' ||
-		(flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l' ||
+		flag[k] == '#' || flag[k] == '0' || flag[k] == '.' || flag[k] == 't'
+		|| (flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l' ||
 		flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z' || flag[k] == '*')
 	{
 		if (flag[k] == '-' || flag[k] == '+' || flag[k] == ' '
 			|| flag[k] == '#' || flag[k] == '0' || flag[k] == '*' ||
 			flag[k] == 'l' || flag[k] == 'h' || flag[k] == 'j' ||
-			flag[k] == 'z')
+			flag[k] == 'z' || flag[k] == 't')
 			k++;
 		else if (flag[k] <= '9' && flag[k] >= '0')
 			while (flag[k] <= '9' && flag[k] >= '0')

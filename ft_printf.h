@@ -69,5 +69,6 @@ int					n_byte(unsigned int i);
 char				*ft_n_and_s(char c, int n, char *str, int i);
 int					modif_s0(t_plist *par);
 int					all_param(char *flag, int k, t_plist *param, va_list arg);
+int					modif_t(t_plist *par, va_list arg, char type);
 
 #endif

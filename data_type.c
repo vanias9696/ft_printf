@@ -19,6 +19,8 @@ static int	modif(t_plist *par, va_list arg, char type)
 
 	n = ft_while_not_n(par->spec, 'h');
 	i = ft_while_not_n(par->spec, 'l');
+	if (ft_while_not_n(par->spec, 't') >= 0)
+		return (modif_z(par, arg, type));
 	if (ft_while_not_n(par->spec, 'z') >= 0)
 		return (modif_z(par, arg, type));
 	if (ft_while_not_n(par->spec, 'j') >= 0)
