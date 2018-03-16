@@ -12,50 +12,16 @@
 
 #include "ft_printf.h"
 
-static char	*less_0(char *s, const char *str, int n, char c)
+char *ft_n_and_s(char symb, int num, char *str, int first)
 {
-	int i;
-	int t;
+	char *n_str;
+	char *free_s;
 
-	t = 0;
-	i = ft_strlen(str);
-	while (str[t])
-	{
-		s[t] = str[t];
-		t++;
-	}
-	while (t - i < n)
-	{
-		s[t] = c;
-		t++;
-	}
-	s[t] = '\0';
-	return (s);
-}
-
-char		*ft_n_and_s(char c, int n, char const *str, int i)
-{
-	char	*s;
-	int		t;
-
-	t = 0;
-	if (!(s = (char *)malloc(n + 1 + ft_strlen(str))))
-		return (0);
-	if (i > 0)
-	{
-		while (t < n)
-		{
-			s[t] = c;
-			t++;
-		}
-		while ((unsigned long)t < ft_strlen(str) + n + 1)
-		{
-			s[t] = str[t - n];
-			t++;
-		}
-		s[t] = '\0';
-	}
+	free_s = ft_by_n(num, symb);
+	if (first >= 0)
+		n_str = ft_strjoin(free_s, str);
 	else
-		s = less_0(s, str, n, c);
-	return (s);
+		n_str = ft_strjoin(str, free_s);
+	free(free_s);
+	return (n_str);
 }

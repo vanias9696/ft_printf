@@ -66,8 +66,8 @@ unsigned int		two_to_ten(unsigned int k);
 int					ac_n_bytes(unsigned int *s, int acc);
 int					n_bytes(unsigned int *s);
 int					n_byte(unsigned int i);
-char				*ft_n_and_s(char c, int n, char const *str, int i);
+char				*ft_n_and_s(char c, int n, char *str, int i);
 int					modif_s0(t_plist *par);
-int					all_param(char *flag, int k, t_plist *param);
+int					all_param(char *flag, int k, t_plist *param, va_list arg);
 
 #endif

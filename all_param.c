@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	flag_wide_acc(t_plist *param, char *flag, int k)
+static int	flag_wide_acc(t_plist *param, char *flag, int k, va_list arg)
 {
 	if (flag[k] <= '9' && flag[k] >= '0')
 	{
@@ -23,14 +23,22 @@ static int	flag_wide_acc(t_plist *param, char *flag, int k)
 	else if (flag[k] == '.')
 	{
 		param->if_acc = 1;
-		param->accuracy = ft_atoi(++k + flag);
-		while (flag[k] <= '9' && flag[k] >= '0')
-			k++;
+		if (flag[k + 1] == '*')
+		{
+			param->accuracy = va_arg(arg, int);
+			k = k + 2;
+		}
+		else
+		{
+			param->accuracy = ft_atoi(++k + flag);
+			while (flag[k] <= '9' && flag[k] >= '0')
+				k++;
+		}
 	}
 	return (k);
 }
 
-int			all_param(char *flag, int k, t_plist *param)
+int			all_param(char *flag, int k, t_plist *param, va_list arg)
 {
 	char *free_s;
 
@@ -41,8 +49,20 @@ int			all_param(char *flag, int k, t_plist *param)
 		param->flag = ft_strcjoin(param->flag, flag[k++], 1);
 		free(free_s);
 	}
+	else if (flag[k] == '*')
+	{
+		param->wide = va_arg(arg, int);
+		if (param->wide < 0)
+		{
+			param->wide = param->wide * -1;
+			free_s = param->flag;
+			param->flag = ft_strcjoin(param->flag, '-', 1);
+			free(free_s);
+		}
+		k++;
+	}
 	else if ((flag[k] <= '9' && flag[k] >= '0') || flag[k] == '.')
-		k = flag_wide_acc(param, flag, k);
+		k = flag_wide_acc(param, flag, k, arg);
 	else
 	{
 		free_s = param->spec;

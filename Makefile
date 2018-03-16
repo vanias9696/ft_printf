@@ -15,7 +15,7 @@ NAME	=	libftprintf.a
 FUNC	=	ft_printf.c data_type.c unicode.c one_two_byte.c three_byte.c	\
 			four_byte.c modif_else.c modif_ls.c modif_zjl.c flags.c 		\
 			type_s.c acc_bytes.c modif_p.c ft_n_and_s.c type_c.c			\
-			all_param.c flags_oux.c
+			all_param.c flags_oux.c new.c
 
 OBJ		=	$(FUNC:.c=.o)
 

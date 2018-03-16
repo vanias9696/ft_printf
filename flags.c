@@ -120,7 +120,6 @@ char		*flags_id(t_plist *par, char *s)
 			free(free_s);
 		}
 	}
-	free_s = s;
 	s = flags_id_without_acc(par, s);
 	return (s);
 }

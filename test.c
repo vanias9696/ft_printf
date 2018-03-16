@@ -26,6 +26,14 @@
 int	main(void)
 {
 	setlocale(LC_ALL, "");
-	printf("%i 1\n", printf("%4.15d\n", 424242));
+
+
+	ft_printf("|%01.*#8d|my\n", 7, 25);
+	printf("|%01.*#8d|my\n", -5, 25);
+	printf("|%08.*d|\n", -200000000, -25);
+	//printf("%i 1\n", printf("{%*c}\n", -15, 0));
+	//printf("%i 2\n", ft_printf("{%*c}\n", -15, 0));
+	//printf("%i 3\n", printf("{%-15c}\n", 0));
+	//printf("%i 4\n", ft_printf("{%-15c}\n", 0));
 	return (0);
 }

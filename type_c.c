@@ -17,10 +17,7 @@ static int	modif_c0(t_plist *par)
 	if (par->wide > 1)
 	{
 		if (ft_while_not_n(par->flag, '-') >= 0)
-		{
-			ft_putchar('\0');
-			return (0);
-		}
+			ft_putstr(ft_by_n(par->wide - 1, ' '));
 		else if (ft_while_not_n(par->flag, '0') >= 0)
 			ft_putstr(ft_by_n(par->wide - 1, '0'));
 		else

@@ -17,44 +17,45 @@ static int	fl_width_acc(char *flag, va_list arg, int k)
 	t_plist	*param;
 
 	param = (t_plist *)malloc(sizeof(t_plist));
-	param->flag = ft_strnew(1);
-	param->spec = ft_strnew(1);
+	param->spec = ft_strdup("22");
+	param->flag = ft_strdup("22");
 	param->if_acc = 0;
 	param->wide = 0;
-	while (flag[k] == '-' || flag[k] == '+' || flag[k] == ' '
-		|| flag[k] == '#' || flag[k] == '0' || flag[k] == '.'
-		|| (flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l'
-		|| flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z')
-		k = all_param(flag, k, param);
+	while (flag[k] == '-' || flag[k] == '+' || flag[k] == ' ' ||
+		flag[k] == '#' || flag[k] == '0' || flag[k] == '.' ||
+		(flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l' ||
+		flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z' ||
+		flag[k] == '*')
+		k = all_param(flag, k, param, arg);
 	k = type_defin(param, arg, flag[k]);
-	free(param->flag);
 	free(param->spec);
+	free(param->flag);
 	free(param);
 	return (k);
 }
 
 static int	num_i(char *flag, int k)
 {
-	while (flag[k] == '-' || flag[k] == '+' || flag[k] == ' '
-		|| flag[k] == '#' || flag[k] == '0' || flag[k] == '.'
-		|| (flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l'
-		|| flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z')
+	while (flag[k] == '-' || flag[k] == '+' || flag[k] == ' ' ||
+		flag[k] == '#' || flag[k] == '0' || flag[k] == '.' ||
+		(flag[k] <= '9' && flag[k] >= '0') || flag[k] == 'l' ||
+		flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z' || flag[k] == '*')
 	{
 		if (flag[k] == '-' || flag[k] == '+' || flag[k] == ' '
-			|| flag[k] == '#' || flag[k] == '0')
+			|| flag[k] == '#' || flag[k] == '0' || flag[k] == '*' ||
+			flag[k] == 'l' || flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z')
 			k++;
 		else if (flag[k] <= '9' && flag[k] >= '0')
 			while (flag[k] <= '9' && flag[k] >= '0')
 				k++;
-		else if (flag[k] == '.')
+		else if (flag[k] == '.' && k++)
 		{
-			k++;
-			while (flag[k] <= '9' && flag[k] >= '0')
+			if (flag[k] == '*')
 				k++;
+			else
+				while (flag[k] <= '9' && flag[k] >= '0')
+					k++;
 		}
-		else if (flag[k] == 'l' || flag[k] == 'h' ||
-			flag[k] == 'j' || flag[k] == 'z')
-			k++;
 	}
 	if (flag[k] == '\0')
 		return (k);
