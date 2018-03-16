@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-char *ft_n_and_s(char symb, int num, char *str, int first)
+char	*ft_n_and_s(char symb, int num, char *str, int first)
 {
 	char *n_str;
 	char *free_s;

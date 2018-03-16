@@ -43,7 +43,8 @@ static int	num_i(char *flag, int k)
 	{
 		if (flag[k] == '-' || flag[k] == '+' || flag[k] == ' '
 			|| flag[k] == '#' || flag[k] == '0' || flag[k] == '*' ||
-			flag[k] == 'l' || flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z')
+			flag[k] == 'l' || flag[k] == 'h' || flag[k] == 'j' ||
+			flag[k] == 'z')
 			k++;
 		else if (flag[k] <= '9' && flag[k] >= '0')
 			while (flag[k] <= '9' && flag[k] >= '0')
