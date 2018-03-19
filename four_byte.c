@@ -50,21 +50,27 @@ static void			four_byte_print(t_byte *num)
 
 static int			four_print(t_plist *par, t_byte *num)
 {
+	char *free_s;
+
 	if (ft_while_not_n(par->flag, '-') >= 0)
 	{
+		free_s = ft_by_n(par->wide - 4, ' ');
 		four_byte_print(num);
-		ft_putstr(ft_by_n(par->wide - 4, ' '));
+		ft_putstr(free_s);
 	}
 	else if (ft_while_not_n(par->flag, '0') >= 0)
 	{
-		ft_putstr(ft_by_n(par->wide - 4, '0'));
+		free_s = ft_by_n(par->wide - 4, '0');
+		ft_putstr(free_s);
 		four_byte_print(num);
 	}
 	else
 	{
-		ft_putstr(ft_by_n(par->wide - 4, ' '));
+		free_s = ft_by_n(par->wide - 4, ' ');
+		ft_putstr(free_s);
 		four_byte_print(num);
 	}
+	free(free_s);
 	return (par->wide);
 }
 
@@ -76,10 +82,7 @@ int					four_byte(char *s, t_plist *par)
 	free_s = s;
 	num = (t_byte *)malloc(sizeof(t_byte));
 	if (ft_strlen(s) < 21)
-	{
 		s = ft_n_and_s('0', 21 - ft_strlen(s), s, 1);
-		free(free_s);
-	}
 	num->a0 = s[1] - 48 + (s[0] - 48) * 10;
 	num->a0 = num->a0 * 10 + (s[2] - 48);
 	num->a0 = num->a0 + 11110000;
@@ -88,6 +91,7 @@ int					four_byte(char *s, t_plist *par)
 	num->a1 = two_to_ten(num->a1);
 	num->a2 = two_to_ten(num->a2);
 	num->a3 = a3_four_byte(s, num->a3);
+	free(s);
 	if (par->wide > 4)
 		return (four_print(par, num));
 	four_byte_print(num);

@@ -17,8 +17,8 @@ static int	fl_width_acc(char *flag, va_list arg, int k)
 	t_plist	*param;
 
 	param = (t_plist *)malloc(sizeof(t_plist));
-	param->spec = ft_strdup("22");
-	param->flag = ft_strdup("22");
+	param->spec = ft_strdup("\0");
+	param->flag = ft_strdup("\0");
 	param->if_acc = 0;
 	param->wide = 0;
 	while (flag[k] == '-' || flag[k] == '+' || flag[k] == ' ' ||

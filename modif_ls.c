@@ -87,22 +87,20 @@ static int	print_wide_str(unsigned int *s, t_plist *par, int bytes)
 		free_s = ft_by_n(par->wide - bytes, ' ');
 		str_unicode(s);
 		ft_putstr(free_s);
-		free(free_s);
 	}
 	else if (ft_while_not_n(par->flag, '0') >= 0)
 	{
 		free_s = ft_by_n(par->wide - bytes, '0');
 		ft_putstr(free_s);
 		str_unicode(s);
-		free(free_s);
 	}
 	else
 	{
 		free_s = ft_by_n(par->wide - bytes, ' ');
 		ft_putstr(free_s);
 		str_unicode(s);
-		free(free_s);
 	}
+	free(free_s);
 	return (par->wide);
 }
 
