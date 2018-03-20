@@ -94,10 +94,14 @@ static char	*flags_id_without_acc(t_plist *par, char *s)
 		s = ft_strcjoin(s, ' ', -1);
 		free(free_s);
 	}
+	free_s = s;
 	if (par->wide > (int)ft_strlen(s))
-		s = flags_id_wide(par, s);
+		return (flags_id_wide(par, s));
 	else if (ft_while_not_n(par->flag, '+') >= 0 && ft_while_not_n(s, '+') < 0)
-		s = ft_strcjoin(s, '+', -1);
+	{
+		s = ft_n_and_s('+', 1, s, 1);
+		free(free_s);
+	}
 	return (s);
 }
 

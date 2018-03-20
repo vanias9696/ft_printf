@@ -20,7 +20,6 @@ static void	two_byte_print2(unsigned int a0, unsigned int a1, t_plist *par)
 	{
 		free_s = ft_by_n(par->wide - 2, '0');
 		ft_putstr(free_s);
-		free(free_s);
 		ft_putchar(a0);
 		ft_putchar(a1);
 	}
@@ -30,7 +29,6 @@ static void	two_byte_print2(unsigned int a0, unsigned int a1, t_plist *par)
 		ft_putstr(free_s);
 		ft_putchar(a0);
 		ft_putchar(a1);
-		free(free_s);
 	}
 	free(free_s);
 }

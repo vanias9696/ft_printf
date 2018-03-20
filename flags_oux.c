@@ -69,8 +69,8 @@ static char	*flags_oux_acc(t_plist *par, char type, char *s, int num)
 	}
 	else if (ft_while_not_n(par->flag, '#') >= 0 && num != 0 &&
 		(ft_while_not_n(par->flag, '0') < 0 ||
-		ft_while_not_n(par->flag, '-') >= 0 || ft_strlen(s) >
-		par->wide) && (type == 'x' || type == 'X'))
+		ft_while_not_n(par->flag, '-') >= 0 ||
+		(int)ft_strlen(s) > par->wide) && (type == 'x' || type == 'X'))
 	{
 		s = ft_strjoin("0x", s);
 		free(free_s);
@@ -78,12 +78,26 @@ static char	*flags_oux_acc(t_plist *par, char type, char *s, int num)
 	return (s);
 }
 
-char		*flags_oux(t_plist *par, char type, char *s, int num)
+static char	*do_x_up(char *s)
 {
-	size_t	i;
+	int i;
 
 	i = 0;
+	while (s[i])
+	{
+		if ((s[i] >= 'a' && s[i] <= 'f') || s[i] == 'x')
+			s[i] = s[i] - 32;
+		i++;
+	}
+	return (s);
+}
+
+char		*flags_oux(t_plist *par, char type, char *s, int num)
+{
+	char	*free_s;
+
 	s = flags_oux_acc(par, type, s, num);
+	free_s = s;
 	if (par->wide > (int)ft_strlen(s))
 	{
 		if (ft_while_not_n(par->flag, '-') >= 0)
@@ -97,12 +111,9 @@ char		*flags_oux(t_plist *par, char type, char *s, int num)
 		}
 		else
 			s = ft_n_and_s(' ', par->wide - ft_strlen(s), s, 1);
+		free(free_s);
 	}
-	while (s[i] && type == 'X')
-	{
-		if ((s[i] >= 'a' && s[i] <= 'f') || s[i] == 'x')
-			s[i] = s[i] - 32;
-		i++;
-	}
+	if (type == 'X')
+		return (do_x_up(s));
 	return (s);
 }

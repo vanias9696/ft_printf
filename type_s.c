@@ -12,24 +12,29 @@
 
 #include "ft_printf.h"
 
-static void	modif_s0_acc_wide(t_plist *par)
+static void	modif_s0_acc_wide(t_plist *par, char *s)
 {
-	char *free_s;
+	char	*free_s;
+	int		l;
 
+	l = ft_strlen(s);
 	if (ft_while_not_n(par->flag, '-') >= 0)
 	{
-		free_s = ft_by_n(par->wide, ' ');
+		ft_putstr(s);
+		free_s = ft_by_n(par->wide - l, ' ');
 		ft_putstr(free_s);
 	}
 	else if (ft_while_not_n(par->flag, '0') >= 0)
 	{
-		free_s = ft_by_n(par->wide, '0');
+		free_s = ft_by_n(par->wide - l, '0');
 		ft_putstr(free_s);
+		ft_putstr(s);
 	}
 	else
 	{
-		free_s = ft_by_n(par->wide, ' ');
+		free_s = ft_by_n(par->wide - l, ' ');
 		ft_putstr(free_s);
+		ft_putstr(s);
 	}
 	free(free_s);
 }
@@ -38,20 +43,23 @@ static int	modif_s0_acc(t_plist *par)
 {
 	char *s;
 
-	if (par->accuracy < 6)
+	if (par->accuracy <= 6)
 	{
 		s = (char *)malloc(par->accuracy + 1);
 		s = ft_strncpy(s, "(null)", par->accuracy);
 		s[par->accuracy] = '\0';
 	}
-	if (par->wide > ft_strlen(s))
-		modif_s0_acc_wide(par);
+	else
+		s = ft_strdup("\0");
+	if (par->wide > (int)ft_strlen(s))
+		modif_s0_acc_wide(par, s);
 	else
 	{
 		ft_putstr(s);
 		free(s);
 		return (par->accuracy);
 	}
+	free(s);
 	return (par->wide);
 }
 
@@ -102,6 +110,7 @@ int			modif_s(t_plist *par, va_list arg)
 {
 	char	*s;
 	char	*st;
+	char	*free_s;
 
 	s = va_arg(arg, char *);
 	if (s == 0)
@@ -109,18 +118,32 @@ int			modif_s(t_plist *par, va_list arg)
 	if (par->if_acc == 1 && par->accuracy < (int)ft_strlen(s))
 	{
 		st = (char *)malloc(par->accuracy + 1);
-		s = ft_strncpy(st, s, par->accuracy);
+		st = ft_strncpy(st, s, par->accuracy);
 		st[par->accuracy] = '\0';
 		s = st;
 	}
 	if (par->wide > (int)ft_strlen(s))
 	{
 		if (ft_while_not_n(par->flag, '-') >= 0)
-			s = ft_strjoin(s, ft_by_n(par->wide - ft_strlen(s), ' '));
+		{
+			free_s = ft_by_n(par->wide - ft_strlen(s), ' ');
+			ft_putstr(s);
+			ft_putstr(free_s);
+		}
 		else if (ft_while_not_n(par->flag, '0') >= 0)
-			s = ft_strjoin(ft_by_n(par->wide - ft_strlen(s), '0'), s);
+		{
+			free_s = ft_by_n(par->wide - ft_strlen(s), '0');
+			ft_putstr(free_s);
+			ft_putstr(s);
+		}
 		else
-			s = ft_strjoin(ft_by_n(par->wide - ft_strlen(s), ' '), s);
+		{
+			free_s = ft_by_n(par->wide - ft_strlen(s), ' ');
+			ft_putstr(free_s);
+			ft_putstr(s);
+		}
+		free(free_s);
+		return (par->wide);
 	}
 	ft_putstr(s);
 	return (ft_strlen(s));

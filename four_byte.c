@@ -79,10 +79,13 @@ int					four_byte(char *s, t_plist *par)
 	t_byte	*num;
 	char	*free_s;
 
-	free_s = s;
 	num = (t_byte *)malloc(sizeof(t_byte));
 	if (ft_strlen(s) < 21)
+	{
+		free_s = s;
 		s = ft_n_and_s('0', 21 - ft_strlen(s), s, 1);
+		free(free_s);
+	}
 	num->a0 = s[1] - 48 + (s[0] - 48) * 10;
 	num->a0 = num->a0 * 10 + (s[2] - 48);
 	num->a0 = num->a0 + 11110000;

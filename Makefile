@@ -27,7 +27,7 @@ all: $(NAME)
 
 $(NAME):
 	make -C libft/
-	@$(CC) -c $(FUNC)
+	@$(CC) $(FLAGS) -c $(FUNC)
 	@ar rc $(NAME) $(OBJ) libft/obj/*.o
 
 clean:

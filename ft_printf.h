@@ -18,7 +18,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <stdlib.h>
-# include <stdio.h>
 # include "libft/libft.h"
 
 typedef struct		s_print

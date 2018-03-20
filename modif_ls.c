@@ -34,7 +34,7 @@ static int	while_acc(int bytes, t_plist *null, unsigned int *s)
 	return (n);
 }
 
-int			pri_acc_unic(unsigned int *s, t_plist *par, int bytes)
+static int	pri_acc_unic(unsigned int *s, t_plist *par)
 {
 	t_plist	*null;
 	int		n;
@@ -52,13 +52,13 @@ int			pri_acc_unic(unsigned int *s, t_plist *par, int bytes)
 	return (n);
 }
 
-int			acc_unic(unsigned int *s, t_plist *par, int bytes)
+static int	acc_unic(unsigned int *s, t_plist *par, int bytes)
 {
 	char	*free_s;
 
 	if (ft_while_not_n(par->flag, '-') >= 0)
 	{
-		pri_acc_unic(s, par, bytes);
+		pri_acc_unic(s, par);
 		free_s = ft_by_n(par->wide - bytes, ' ');
 		ft_putstr(free_s);
 	}
@@ -66,13 +66,13 @@ int			acc_unic(unsigned int *s, t_plist *par, int bytes)
 	{
 		free_s = ft_by_n(par->wide - bytes, '0');
 		ft_putstr(free_s);
-		pri_acc_unic(s, par, bytes);
+		pri_acc_unic(s, par);
 	}
 	else
 	{
 		free_s = ft_by_n(par->wide - bytes, ' ');
 		ft_putstr(free_s);
-		pri_acc_unic(s, par, bytes);
+		pri_acc_unic(s, par);
 	}
 	free(free_s);
 	return (par->wide);
@@ -124,6 +124,6 @@ int			modif_ls(t_plist *par, va_list arg)
 	}
 	if ((par->if_acc == 1 && par->wide < par->accuracy) ||
 		(par->if_acc == 0 && par->wide < bytes))
-		return (pri_acc_unic(s, par, bytes));
+		return (pri_acc_unic(s, par));
 	return (acc_unic(s, par, ac_n_bytes(s, par->accuracy)));
 }
