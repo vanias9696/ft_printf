@@ -101,9 +101,11 @@ static int	type_else(t_plist *par, char c)
 	return (1);
 }
 
-int			type_defin(t_plist *par, va_list arg, char type)
+int			type_defin(t_plist *par, va_list arg, char type, int k_ret)
 {
-	if (type == 'd' || type == 'i' || type == 'o' ||
+	if (type == 'n')
+		return (type_n(k_ret, arg));
+	else if (type == 'd' || type == 'i' || type == 'o' ||
 		type == 'u' || type == 'x' || type == 'X')
 		return (modif(par, arg, type));
 	else if (type == 'D' || type == 'U' || type == 'O')

@@ -39,7 +39,7 @@ typedef struct		s_byte
 }					t_byte;
 
 int					ft_printf(char *format, ...);
-int					type_defin(t_plist *par, va_list arg, char type);
+int					type_defin(t_plist *par, va_list arg, char type, int k_ret);
 char				*flags_mid(t_plist *par, char *s);
 char				*flags_oux(t_plist *par, char type, char *s, int num);
 char				*flags_id(t_plist *par, char *s);
@@ -69,5 +69,6 @@ char				*ft_n_and_s(char c, int n, char *str, int i);
 int					modif_s0(t_plist *par);
 int					all_param(char *flag, int k, t_plist *param, va_list arg);
 int					modif_t(t_plist *par, va_list arg, char type);
+int					type_n(int k_ret, va_list arg);
 
 #endif

@@ -14,7 +14,7 @@
 
 int		modif_t(t_plist *par, va_list arg, char type)
 {
-	size_t		i;
+	intmax_t	i;
 	char		*s;
 
 	i = va_arg(arg, size_t);

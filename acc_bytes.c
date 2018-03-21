@@ -68,3 +68,12 @@ int		n_bytes(unsigned int *s)
 	}
 	return (bytes);
 }
+
+int		type_n(int k_ret, va_list arg)
+{
+	int *i;
+
+	i = va_arg(arg, int *);
+	*i = k_ret;
+	return (0);
+}

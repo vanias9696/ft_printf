@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static int	fl_width_acc(char *flag, va_list arg, int k)
+static int	fl_width_acc(char *flag, va_list arg, int k, int k_ret)
 {
 	t_plist	*param;
 
@@ -27,7 +27,7 @@ static int	fl_width_acc(char *flag, va_list arg, int k)
 		flag[k] == 'h' || flag[k] == 'j' || flag[k] == 'z' ||
 		flag[k] == '*' || flag[k] == 't')
 		k = all_param(flag, k, param, arg);
-	k = type_defin(param, arg, flag[k]);
+	k = type_defin(param, arg, flag[k], k_ret);
 	free(param->spec);
 	free(param->flag);
 	free(param);
@@ -83,7 +83,7 @@ static int	find_percent(char *format, va_list arg, int i)
 		}
 		else
 		{
-			k_ret = k_ret + fl_width_acc(format, arg, i + 1);
+			k_ret = k_ret + fl_width_acc(format, arg, i + 1, k_ret);
 			i = num_i(format, i + 1);
 		}
 	}
